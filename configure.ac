@@ -1,5 +1,12 @@
 AC_PREREQ(2.59)
-AC_INIT(FULL-PACKAGE-NAME, VERSION, BUG-REPORT-ADDRESS)
+AC_INIT([skey], [2.0])
+
+AM_INIT_AUTOMAKE([-Wall])
+
+AC_PROG_CC
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_FILES([Makefile lib/Makefile man/Makefile skey/Makefile 
+			  include/Makefile])
 
 dnl check required headers
 AC_CHECK_HEADER(stdlib.h, , [echo "require stdlib.h"; exit 1])

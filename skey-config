@@ -1,0 +1,1 @@
+./configure --prefix=${HOME}/tmp/skey CPPFLAGS='-I `pwd`/include'
