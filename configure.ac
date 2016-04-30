@@ -4,6 +4,7 @@ AC_INIT([skey], [2.0])
 AM_INIT_AUTOMAKE([-Wall])
 
 AC_PROG_CC
+AC_PROG_RANLIB
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([Makefile lib/Makefile man/Makefile skey/Makefile 
 			  include/Makefile])

@@ -1,1 +1,4 @@
-./configure --prefix=${HOME}/tmp/skey CPPFLAGS='-I `pwd`/include'
+LOCAL=`pwd`
+SRCDIR=${LOCAL}
+autoreconf -i
+./configure --prefix=${HOME}/tmp/skey CPPFLAGS='-I /home/chaojwang/hw4-chaojwang/include'
