@@ -1,1 +1,1 @@
-header_HEADERS = skey.h
+include_HEADERS = skey.h
