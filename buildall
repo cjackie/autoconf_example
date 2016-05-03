@@ -18,4 +18,5 @@ if test $? != 0 ; then
 fi
 make || exit $?
 make check
+make dist
 make install
