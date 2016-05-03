@@ -11,5 +11,11 @@ mkdir -p ${BUILD_DIR}
 cd ${BUILD_DIR}
 ${SRCDIR}/configure --prefix=${HOME}/bin/${SYS} --enable-dynamic --disable-static CPPFLAGS="-I ${SRCDIR}/include"
 
+make clean
+if test $? != 0 ; then
+    echo "make clean failed"
+    exit 1
+fi
 make || exit $?
+make check
 make install

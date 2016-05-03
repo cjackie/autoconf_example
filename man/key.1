@@ -8,7 +8,7 @@
 .SH NAME
 key \-  Stand\-alone program for computing responses to S/Key challenges.
 .SH SYNOPSIS
-.B key [\-n <count>] [\-p <password>] <Sequence> <key> 
+.B key [-l logfile] [-d] [-h] [-v] [\-n <count>] [\-p <password>] <Sequence> <key> 
 .SH DESCRIPTION
 .I key
 Takes the optional count  of the number of one time access 
@@ -35,6 +35,27 @@ and produces both word and hex format responses.
 .B \-n <count>
 the number of one time access passwords to print.
 The default is one.
+
+.B \-d
+Increase debugging level by one. May be specified multiple times.
+Debugging level 1 will show entry/exit point of every function.
+Level 2 will also show return values about to be returned from
+functions.  Level 3 will also show arguments passed to functions.
+All debugging output should go to stderr by default.  As there are
+many possible functions to add debugging to, you should instrument
+at least ten (10) such functions, including main().  Ensure that
+each function you instrument is actually called during a common use
+of the skey tool, so as to prove that your instrumentation for
+debugging is working.(taken from hw3 description)
+
+.B \-v
+To display a version number of the package
+
+.B \-h
+Print out help message
+
+.B \-l <logfile>
+Redirect debugging output to a logfile.
 
 .B \-p <password>
 user's secret password.
