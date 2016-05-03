@@ -52,15 +52,15 @@ PROGRAMS = $(bin_PROGRAMS)
 am_key_OBJECTS = skey.$(OBJEXT)
 key_OBJECTS = $(am_key_OBJECTS)
 key_LDADD = $(LDADD)
-key_DEPENDENCIES = ../lib/libskey.a
+key_DEPENDENCIES = ../lib/libskey.la
 am_keyinit_OBJECTS = skeyinit.$(OBJEXT)
 keyinit_OBJECTS = $(am_keyinit_OBJECTS)
 keyinit_LDADD = $(LDADD)
-keyinit_DEPENDENCIES = ../lib/libskey.a
+keyinit_DEPENDENCIES = ../lib/libskey.la
 am_keysh_OBJECTS = skeysh.$(OBJEXT)
 keysh_OBJECTS = $(am_keysh_OBJECTS)
 keysh_LDADD = $(LDADD)
-keysh_DEPENDENCIES = ../lib/libskey.a
+keysh_DEPENDENCIES = ../lib/libskey.la
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -177,7 +177,7 @@ target_alias = @target_alias@
 key_SOURCES = skey.c
 keyinit_SOURCES = skeyinit.c
 keysh_SOURCES = skeysh.c
-LDADD = ../lib/libskey.a
+LDADD = ../lib/libskey.la
 all: all-am
 
 .SUFFIXES:
