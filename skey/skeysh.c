@@ -28,6 +28,10 @@ char *shell = "/bin/csh";
 char *getenv(char *ename);
 #endif
 
+#ifdef NO_SETENV
+void setenv(char *ename, char *eval, char *buf);
+#endif
+
 extern char **environ;
 struct passwd *pwd;
 
@@ -85,13 +89,18 @@ main (argc, argv)
   cleanenv[4] = getenv("TERM");
   environ = cleanenv;
   
-  
+#ifdef NO_SETENV
+  setenv("USER", pwd->pw_name, userbuf);
+  setenv("SHELL", shell, shellbuf);
+  setenv("HOME", pwd->pw_dir, homebuf);
+#else
   strcat(userbuf, pwd->pw_name);
   putenv(userbuf);
   strcat(shellbuf, shell);
   putenv(shellbuf);
   strcat(homebuf, pwd->pw_dir);
   putenv(homebuf);
+#endif
 
   if (chdir(pwd->pw_dir) < 0) {
       fprintf(stderr, "No directory\n");
@@ -117,5 +126,27 @@ char *getenv(char *ename)
               return (*--ep);
   }
   return ((char *)0);
+}
+#endif
+
+
+#ifdef NO_SETENV
+void setenv (char *ename, char *eval, char *buf)
+{
+  register char *cp, *dp;
+  register char **ep = environ;
+ 
+  /*
+   * this assumes an environment variable "ename" already exists
+   */
+   while (dp = *ep++) {
+       for (cp = ename; *cp == *dp && *cp; cp++, dp++)
+            continue;
+       if (*cp == 0 && (*dp == '=' || *dp == 0)) {
+            strcat(buf, eval);
+            *--ep = buf;
+            return;
+       }
+   }
 }
 #endif
