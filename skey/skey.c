@@ -55,7 +55,7 @@ int main (int argc, char *argv[]) {
 
   logfile = stderr;
   
-  while ((i = getopt (argc, argv, "hvdl:")) != EOF)
+  while ((i = getopt (argc, argv, "p:n:hvdl:")) != EOF)
   {
     switch (i)
     {
@@ -71,6 +71,9 @@ int main (int argc, char *argv[]) {
     case 'l':
       l_flag = 1;
       strncpy(l_file, optarg, l_file_size);
+      break;
+    case 'p':
+    case 'n':
       break;
     }
   }
@@ -103,7 +106,8 @@ int __main (int argc, char *argv[])
   char passwd[256], key[8], buf[33], *seed, *slash;
 
   cnt = 1;
-
+  /* reset it */
+  optind = 1;
   while ((i = _getopt (argc, argv, "n:p:")) != EOF)
   {
     switch (i)
