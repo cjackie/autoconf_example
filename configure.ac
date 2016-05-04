@@ -1,7 +1,7 @@
 AC_PREREQ(2.59)
 AC_INIT([skey], [2.0])
 
-AM_INIT_AUTOMAKE([-Wall])
+AM_INIT_AUTOMAKE([-Wall -Werror])
 
 AC_PROG_CC
 AC_ENABLE_SHARED
