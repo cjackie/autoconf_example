@@ -33,6 +33,64 @@
 char *skipspace();
 int skeylookup (struct skey *mp,char *name);
 
+/* Convert hex digit to binary integer */
+int
+htoi(register char c)
+{
+	if('0' <= c && c <= '9')
+		return c - '0';
+	if('a' <= c && c <= 'f')
+		return 10 + c - 'a';
+	if('A' <= c && c <= 'F')
+		return 10 + c - 'A';
+	return -1;
+}
+
+
+/* Convert 8-byte binary array to hex-ascii string */
+int
+btoa8(register char *out,register char *in)
+{
+	register int i;
+
+	if(in == NULL || out == NULL)
+		return -1;
+
+	for(i=0;i<8;i++){
+		sprintf(out,"%02x",*in++ & 0xff);
+		out += 2;
+	}
+	return 0;
+}
+
+
+/* Convert 8-byte hex-ascii string to binary array
+ * Returns 0 on success, -1 on error
+ */
+int atob8(register char *out, char *in)
+{
+	register int i;
+	register int val;
+
+	if (in == NULL || out == NULL)
+		return -1;
+
+	for(i=0;i<8;i++){
+		if((in = skipspace(in)) == NULL)
+			return -1;
+		if((val = htoi(*in++)) == -1)
+			return -1;
+		*out = val << 4;
+
+		if((in = skipspace(in)) == NULL)
+			return -1;
+		if((val = htoi(*in++)) == -1)
+			return -1;
+		*out++ |= val;
+	}
+	return 0;
+}
+
 
 /* Issue a skey challenge for user 'name'. If successful,
  * fill in the caller's skey structure and return 0. If unsuccessful
@@ -158,17 +216,12 @@ skeylookup(struct skey *mp, char *name)
 int
 skeyverify(struct skey *mp, char *response)
 {
- struct timeval startval;
- struct timeval endval;
-long microsec;
 	char key[8];
 	char fkey[8];
 	char filekey[8];
 	time_t now;
 	struct tm *tm;
-	char tbuf[27],buf[60];
-	char me[80];
-	int rval;
+	char tbuf[27];
 	char *cp;
 
 	time(&now);
@@ -243,46 +296,6 @@ long microsec;
 	return 0;
 }
 
-/* Convert hex digit to binary integer */
-int
-htoi(register char c)
-{
-	if('0' <= c && c <= '9')
-		return c - '0';
-	if('a' <= c && c <= 'f')
-		return 10 + c - 'a';
-	if('A' <= c && c <= 'F')
-		return 10 + c - 'A';
-	return -1;
-}
-
-
-/* Convert 8-byte hex-ascii string to binary array
- * Returns 0 on success, -1 on error
- */
-int atob8(register char *out, char *in)
-{
-	register int i;
-	register int val;
-
-	if (in == NULL || out == NULL)
-		return -1;
-
-	for(i=0;i<8;i++){
-		if((in = skipspace(in)) == NULL)
-			return -1;
-		if((val = htoi(*in++)) == -1)
-			return -1;
-		*out = val << 4;
-
-		if((in = skipspace(in)) == NULL)
-			return -1;
-		if((val = htoi(*in++)) == -1)
-			return -1;
-		*out++ |= val;
-	}
-	return 0;
-}
 
 char *
 skipspace(register char *cp)
@@ -296,23 +309,6 @@ skipspace(register char *cp)
 		return cp;
 }
 
-/* Convert 8-byte binary array to hex-ascii string */
-int
-btoa8(register char *out,register char *in)
-{
-	register int i;
-
-	if(in == NULL || out == NULL)
-		return -1;
-
-	for(i=0;i<8;i++){
-		sprintf(out,"%02x",*in++ & 0xff);
-		out += 2;
-	}
-	return 0;
-}
-
-
 /*
  * skey_haskey ()
  *
@@ -320,9 +316,8 @@ btoa8(register char *out,register char *in)
  *
  */
  
-void skey_haskey(char *username)
+int skey_haskey(char *username)
 {
-  int i;
   struct skey skey;
  
   return (skeylookup (&skey, username));

@@ -29,14 +29,20 @@ int gethostname(char *name, int len);
 
 #define NAMELEN 2
 
-main (argc, argv)
-  int argc;
-  char *argv[];
+int isdigit(int c) {
+  if (c >= '0' || c <= '9') {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+int main (int argc, char *argv[])
 {
   int rval, n, nn, i, defaultsetup, l;
   time_t now;
   char seed[18], tmp[80], key[8], defaultseed[17], passwd[256], passwd2[256],
-       tbuf[27], buf[60], lastc, me[80], user [8], *salt, *p, *pw; 
+       tbuf[27], buf[60], lastc, me[80], *salt, *p, *pw; 
   struct skey skey;
   struct passwd *pp;
   struct tm *tm;

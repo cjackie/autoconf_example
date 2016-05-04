@@ -34,12 +34,11 @@ void setenv(char *ename, char *eval, char *buf);
 
 extern char **environ;
 struct passwd *pwd;
+int initgroups(const char *user, gid_t group);
 
-main (argc, argv)
-  int argc;
-  char *argv[];
+int main (int argc, char *argv[])
 {
-  int stat, pid;
+  int stat;
   char user [8];
  
   if ((pwd = getpwuid(getuid())) == NULL) {
@@ -110,6 +109,11 @@ main (argc, argv)
   execv (shell, argv);
   fprintf(stderr, "No shell\n");
   exit(7);
+}
+
+int initgroups(const char *user, gid_t group) {
+  /* TODO fix me */
+  return 0;
 }
 
 

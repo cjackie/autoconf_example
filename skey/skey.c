@@ -95,8 +95,7 @@ int main (int argc, char *argv[]) {
     fprintf(stderr, "version number: 0.0.1\n");
   }
 
-  _main(argc, argv);
-
+  return _main(argc, argv);
 }
 
 

@@ -87,8 +87,14 @@ int skeychallenge(struct skey * mp, char *name, char *ss);
 int skeylookup(struct skey * mp, char *name);
 int skeyverify(struct skey * mp, char *response);
 
+
 char *readpass (char *buf, int n);
 void backspace(char *buf);
 void sevenbit (char *s);
+
+int atob8(register char *out, char *in);
+int btoa8(register char *out,register char *in);
+int skey_haskey(char *username);
+int skey_authenticate(char *username);
 
 #endif	/* _SKEY_H_ */
