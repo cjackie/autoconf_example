@@ -9,7 +9,7 @@ echo ${BUILD_DIR}
 mkdir -p ${BUILD_DIR}
 
 cd ${BUILD_DIR}
-${SRCDIR}/configure --prefix=${HOME}/bin/${SYS} --enable-dynamic --disable-static CPPFLAGS="-I ${SRCDIR}/include"
+${SRCDIR}/configure --prefix=${HOME}/bin/${SYS} --enable-dynamic --disable-static
 
 make clean
 if test $? != 0 ; then
