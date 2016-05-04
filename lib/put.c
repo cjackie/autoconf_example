@@ -2282,7 +2282,7 @@ static void
   {
     if (!isascii (*word))
       break;
-    if (islower (*word))
+    if (islower ((int) *word))
       *word = toupper (*word);
     if (*word == '1')
       *word = 'L';

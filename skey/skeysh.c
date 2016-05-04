@@ -143,7 +143,7 @@ void setenv (char *ename, char *eval, char *buf)
   /*
    * this assumes an environment variable "ename" already exists
    */
-   while (dp = *ep++) {
+  while (NULL != (dp = *ep++)) {
        for (cp = ename; *cp == *dp && *cp; cp++, dp++)
             continue;
        if (*cp == 0 && (*dp == '=' || *dp == 0)) {
