@@ -3,15 +3,14 @@
 - created configure.ac from autoscan.
 - created makefile.am for each directories.
 - modified configure.ac, and makefile.am.
-- generated configure script and makefiles with autoreconf.
 - copied source files from hw3 into these 4 directories.
 - created skeytest.sh in skey for testing using "make check".
-- use litoolize to generate additional files.
 - created buildall. It will build, check and then install. 
 
 
 ## buildall
-just run this script. It will build, check and then install.
+change the SCRDIR in the script to the source files directory
+then just run this script. It will build, check and then install.
 
 
 

@@ -16,7 +16,7 @@ if test $? != 0 ; then
     echo "make clean failed"
     exit 1
 fi
-make || exit $?
+make CFLAGS='-Wall -Werror' || exit $?
 make check
 make dist
 make install
