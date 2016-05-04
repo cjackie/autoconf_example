@@ -14,6 +14,7 @@ AC_CONFIG_FILES([Makefile lib/Makefile man/Makefile skey/Makefile
 dnl check required headers
 AC_CHECK_HEADER(stdlib.h, , [echo "require stdlib.h"; exit 1])
 AC_CHECK_HEADER(sys/quota.h,[AC_DEFINE([QUOTA], [], [setenv])],)
+AC_CHECK_HEADER(crypt.h,[AC_DEFINE([HAVE_CRYPT_H], [], [crypt])],)
 
 dnl check endianness
 AC_C_BIGENDIAN(,[AC_DEFINE([IS_LITTLE_ENDIAN], [], [endianness])])

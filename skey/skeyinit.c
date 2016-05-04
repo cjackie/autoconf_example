@@ -19,7 +19,7 @@
 
 #include "skey.h"
 
-#ifdef HAVE_LIBCRYPT
+#ifdef HAVE_CRYPT_H
 #include <crypt.h>
 #endif
 
